@@ -1,0 +1,41 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-semibold text-gray-800">Mis Canjes</h1>
+</div>
+
+<div *ngIf="loading" class="text-center py-8 text-gray-500">
+  Cargando historial de canjes...
+</div>
+
+<div *ngIf="!loading && canjes.length > 0" class="space-y-4">
+  <div
+    *ngFor="let canje of canjes"
+    class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500"
+  >
+    <div class="flex items-start justify-between">
+      <div class="flex items-start gap-4 flex-1">
+        <z-icon [zType]="GiftIcon" class="w-8 h-8 text-green-600"></z-icon>
+        <div class="flex-1">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">
+            {{ canje.recompensaNombre }}
+          </h3>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-sm text-gray-600">
+              <z-icon [zType]="CalendarIcon" class="w-4 h-4"></z-icon>
+              <span>{{ canje.fechaCanje | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm">
+              <z-icon [zType]="AwardIcon" class="w-4 h-4 text-yellow-500"></z-icon>
+              <span class="font-medium text-yellow-600">{{ canje.puntosCanjeados }} puntos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && canjes.length === 0" class="bg-gray-50 rounded-lg p-8 text-center">
+  <p class="text-gray-500">No has canjeado ninguna recompensa</p>
+</div>

@@ -1,0 +1,45 @@
+<z-card class="p-6 max-w-2xl mx-auto">
+
+    <div class="flex items-center gap-2 mb-4">
+        <z-icon [zType]="ArrowLeft" class="w-5 h-5 cursor-pointer" (click)="volver()"></z-icon>
+        <h2 class="text-xl font-semibold text-gray-800">Nuevo Mantenimiento Preventivo</h2>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+
+        <div>
+            <label class="block text-sm mb-1">Atracción</label>
+            <select formControlName="atraccionId" class="w-full border rounded px-3 py-2">
+                <option value="">Seleccionar...</option>
+                <option *ngFor="let a of atracciones" [value]="a.id">
+                    {{ a.nombre }}
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-sm mb-1">Descripción</label>
+            <textarea formControlName="descripcion" class="w-full border rounded px-3 py-2"></textarea>
+        </div>
+
+        <div>
+            <label class="block text-sm mb-1">Fecha</label>
+            <input type="date" formControlName="fecha" zInput class="w-full" />
+        </div>
+
+        <div>
+            <label class="block text-sm mb-1">Hora inicio</label>
+            <input type="time" formControlName="horaInicio" zInput class="w-full" />
+        </div>
+
+        <div>
+            <label class="block text-sm mb-1">Hora fin</label>
+            <input type="time" formControlName="horaFin" zInput class="w-full" />
+        </div>
+
+        <button z-button zType="default" class="w-full" [disabled]="loading">
+            Crear mantenimiento
+        </button>
+    </form>
+
+</z-card>

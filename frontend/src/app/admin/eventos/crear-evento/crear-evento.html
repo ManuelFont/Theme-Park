@@ -1,0 +1,84 @@
+<div class="max-w-xl mx-auto">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-neutral-900 flex items-center gap-2">
+            <z-icon [zType]="CirclePlus" class="text-primary-500 w-6 h-6"></z-icon>
+            Crear nuevo evento especial
+        </h1>
+
+        <z-button zType="ghost" [routerLink]="['/admin', 'eventos']">
+            <z-icon [zType]="ArrowLeft"></z-icon>
+            Volver
+        </z-button>
+    </div>
+
+    <z-card class="w-full text-start">
+        <form [formGroup]="form" class="space-y-4">
+
+            <div>
+                <label class="text-sm font-medium">Nombre</label>
+                <input z-input formControlName="nombre" placeholder="Noche de Dinosaurios" />
+                <p *ngIf="f['nombre'].touched && f['nombre'].invalid" class="text-xs text-red-500">
+                    2-50 caracteres requeridos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="text-sm font-medium">Fecha</label>
+                    <input z-input type="date" formControlName="fecha" />
+                    <p *ngIf="f['fecha'].touched && f['fecha'].invalid" class="text-xs text-red-500">
+                        Debe seleccionar una fecha válida.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium">Hora</label>
+                    <input z-input type="time" formControlName="hora" />
+                    <p *ngIf="f['hora'].touched && f['hora'].invalid" class="text-xs text-red-500">
+                        Debe seleccionar una hora válida.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Aforo</label>
+                <input z-input type="number" formControlName="aforo" placeholder="100" />
+                <p *ngIf="f['aforo'].touched && f['aforo'].invalid" class="text-xs text-red-500">
+                    Ingrese un aforo válido (mínimo 1).
+                </p>
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Costo adicional</label>
+                <input z-input type="number" formControlName="costoAdicional" placeholder="500" />
+                <p *ngIf="f['costoAdicional'].touched && f['costoAdicional'].invalid" class="text-xs text-red-500">
+                    El costo adicional no puede ser negativo.
+                </p>
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Atracciones incluidas</label>
+                <div class="border rounded-md p-3 mt-1 space-y-2 max-h-64 overflow-y-auto">
+                    <p *ngIf="atracciones.length === 0" class="text-sm text-neutral-500">
+                        No hay atracciones disponibles.
+                    </p>
+
+                    <label *ngFor="let a of atracciones" class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" [checked]="estaSeleccionada(a.id)" (change)="toggleAtraccion(a.id)" />
+                        <span>{{ a.nombre }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-4">
+                <button z-button zType="ghost" [routerLink]="['/admin', 'eventos']">
+                    Cancelar
+                </button>
+
+                <button z-button zType="default" type="button" (click)="onSubmit()" [zLoading]="loading">
+                    Crear evento
+                </button>
+            </div>
+        </form>
+    </z-card>
+</div>

@@ -1,0 +1,17 @@
+<div class="h-screen w-full flex flex-col items-center justify-center text-center px-6">
+  <h1 class="text-7xl font-bold tracking-tight">404</h1>
+
+  <p class="mt-3 text-lg text-gray-500 dark:text-gray-400">Página no encontrada.</p>
+
+  <div class="mt-8 flex flex-col sm:flex-row gap-3">
+    <z-button (click)="goHome()" class="px-5 py-2.5 rounded-md font-medium transition">
+      Volver al inicio
+    </z-button>
+
+    <z-button zType="outline" (click)="goBack()" class="px-5 py-2.5 rounded-md border transition">
+      Volver atrás
+    </z-button>
+  </div>
+  <!-- BORRAR DEPUES, SOLO DEVELOP -->
+  <button (click)="logout()">Logout</button>
+</div>

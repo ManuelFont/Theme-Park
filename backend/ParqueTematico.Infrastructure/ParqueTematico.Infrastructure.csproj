@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Infrastructure</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ParqueTematico.Application\ParqueTematico.Application.csproj" />
+      <ProjectReference Include="..\ParqueTematico.BusinessLogicInterface\ParqueTematico.BusinessLogicInterface.csproj" />
+      <ProjectReference Include="..\ParqueTematico.Domain\ParqueTematico.Domain.csproj" />
+      <ProjectReference Include="..\ParqueTematico.Dtos\ParqueTematico.Dtos.csproj" />
+      <ProjectReference Include="..\ParqueTematico.RepositoryInterface\ParqueTematico.RepositoryInterface.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.3.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+      <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
+</Project>

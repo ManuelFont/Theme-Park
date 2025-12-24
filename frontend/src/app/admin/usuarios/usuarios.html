@@ -1,0 +1,39 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-semibold text-gray-800">Usuarios</h1>
+
+  <z-button zType="default" (click)="crearUsuario()"> + Nuevo usuario </z-button>
+</div>
+
+<table z-table class="w-full">
+  <thead class="bg-gray-100 text-sm text-gray-700 uppercase" z-table-header>
+    <tr z-table-row>
+      <th z-table-head class="py-3 px-4 text-left">Nombre</th>
+      <th z-table-head class="py-3 px-4 text-left">Apellido</th>
+      <th z-table-head class="py-3 px-4 text-left">Email</th>
+      <th z-table-head class="py-3 px-4 text-left">Rol</th>
+      <th z-table-head class="py-3 px-4 text-left">Membresía</th>
+      <th z-table-head class="py-3 px-4 text-right">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody z-table-body>
+    <tr z-table-row *ngFor="let u of usuarios" class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+      <td z-table-cell class="py-3 px-4">{{ u.nombre }}</td>
+      <td z-table-cell class="py-3 px-4">{{ u.apellido }}</td>
+      <td z-table-cell class="py-3 px-4">{{ u.email }}</td>
+      <td z-table-cell class="py-3 px-4">{{ u.tipoUsuario }}</td>
+      <td z-table-cell class="py-3 px-4">{{ u.nivelMembresia || '-' }}</td>
+      <td z-table-cell class="py-3 px-4 text-right">
+        <div class="flex justify-end gap-2">
+          <z-button zType="ghost" size="icon" title="Editar usuario" (click)="editarUsuario(u)">
+            <z-icon [zType]="EditIcon" class="w-4 h-4"></z-icon>
+          </z-button>
+
+          <z-button zType="ghost" size="icon" title="Eliminar usuario" (click)="eliminarUsuario(u.id)">
+            <z-icon [zType]="TrashIcon" class="w-4 h-4 text-red-500"></z-icon>
+          </z-button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

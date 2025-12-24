@@ -1,0 +1,68 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-semibold text-gray-800">Recompensas</h1>
+  <div *ngIf="visitante" class="flex items-center gap-2">
+    <z-icon [zType]="AwardIcon" class="w-5 h-5 text-yellow-500"></z-icon>
+    <span class="text-lg font-semibold text-gray-800">{{ visitante.puntosActuales }} puntos</span>
+  </div>
+</div>
+
+<div *ngIf="loading" class="text-center py-8 text-gray-500">
+  Cargando recompensas...
+</div>
+
+<div *ngIf="!loading && recompensas.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div
+    *ngFor="let recompensa of recompensas"
+    class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500"
+  >
+    <div class="flex items-start gap-4 mb-4">
+      <z-icon [zType]="GiftIcon" class="w-8 h-8 text-blue-600"></z-icon>
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">
+          {{ recompensa.nombre }}
+        </h3>
+        <p class="text-sm text-gray-600 mb-3">{{ recompensa.descripcion }}</p>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-sm">
+            <z-icon [zType]="AwardIcon" class="w-4 h-4 text-yellow-500"></z-icon>
+            <span class="font-medium text-yellow-600">{{ recompensa.costo }} puntos</span>
+          </div>
+
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <z-icon [zType]="PackageIcon" class="w-4 h-4"></z-icon>
+            <span>Stock: {{ recompensa.cantidadDisponible }}</span>
+          </div>
+
+          <div *ngIf="recompensa.nivelMembresia" class="flex items-center gap-2 text-sm text-gray-600">
+            <span class="font-medium">Requiere: {{ recompensa.nivelMembresia }}</span>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <button
+            *ngIf="puedeCanjear(recompensa)"
+            (click)="canjear(recompensa)"
+            [disabled]="canjeando === recompensa.id"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            {{ canjeando === recompensa.id ? 'Canjeando...' : 'Canjear' }}
+          </button>
+
+          <button
+            *ngIf="!puedeCanjear(recompensa)"
+            disabled
+            class="w-full bg-gray-100 text-gray-600 py-2 px-4 rounded-md text-sm cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            <z-icon [zType]="LockIcon" class="w-4 h-4"></z-icon>
+            <span>{{ motivoNoPuedeCanjear(recompensa) }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && recompensas.length === 0" class="bg-gray-50 rounded-lg p-8 text-center">
+  <p class="text-gray-500">No hay recompensas disponibles</p>
+</div>

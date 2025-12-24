@@ -1,0 +1,36 @@
+<div class="p-6 max-w-lg mx-auto">
+    <z-card class="p-6 space-y-6">
+        <div class="space-y-6">
+
+            <h1 class="text-2xl font-bold text-gray-800">Control de acceso</h1>
+
+            <div>
+                <label class="font-medium">Ticket ID (QR/NFC)</label>
+                <input type="text" class="w-full p-2 border rounded-lg mt-1" [(ngModel)]="ticketId"
+                    placeholder="Escanear o ingresar ticket..." />
+            </div>
+
+            <button z-button class="w-full" zType="default" (click)="registrarIngreso()"
+                [disabled]="cargando || !ticketId">
+                Registrar ingreso
+            </button>
+
+            <div *ngIf="cargando" class="text-gray-500 text-center">
+                Procesando...
+            </div>
+
+            <div *ngIf="resultado" class="text-green-700 bg-green-100 p-3 rounded">
+                {{ resultado }}
+            </div>
+
+            <div *ngIf="error" class="text-red-700 bg-red-100 p-3 rounded">
+                {{ error }}
+            </div>
+
+            <button z-button zType="ghost" class="w-full" (click)="volver()">
+                Volver a la atracción
+            </button>
+
+        </div>
+    </z-card>
+</div>

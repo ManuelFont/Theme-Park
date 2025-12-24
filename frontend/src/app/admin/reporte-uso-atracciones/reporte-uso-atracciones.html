@@ -1,0 +1,37 @@
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <div>
+    <label class="block text-sm font-medium mb-1">Fecha Inicio</label>
+    <input type="date" [(ngModel)]="fechaInicio" class="border rounded px-3 py-2 w-full" />
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Fecha Fin</label>
+    <input type="date" [(ngModel)]="fechaFin" class="border rounded px-3 py-2 w-full" />
+  </div>
+
+  <div class="flex items-end">
+    <button z-button zType="default" (click)="buscar()">Buscar</button>
+  </div>
+</div>
+
+<table z-table *ngIf="!cargando" class="mt-4">
+  <caption class="text-left">
+    Visitas por atracción
+  </caption>
+
+  <thead>
+    <tr>
+      <th>Atracción</th>
+      <th>Cantidad de Visitas</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of reporte; track item.atraccionId) {
+    <tr>
+      <td class="font-medium">{{ item.nombreAtraccion }}</td>
+      <td class="text-center">{{ item.cantidadVisitas }}</td>
+    </tr>
+    }
+  </tbody>
+</table>

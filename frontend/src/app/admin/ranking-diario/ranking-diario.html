@@ -1,0 +1,27 @@
+<z-card
+  class="w-full max-w-3xl mx-auto mt-8"
+  zTitle="Ranking diario"
+  zDescription="Top 10 visitantes con más puntos en el día"
+>
+  <div *ngIf="loading" class="flex justify-center py-8">
+    <!-- <z-spinner></z-spinner> -->
+  </div>
+
+  <table z-table>
+    <thead>
+      <tr>
+        <th class="text-left w-24">Posición</th>
+        <th class="text-left">Visitante</th>
+        <th class="text-right w-32">Puntos</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of ranking">
+        <td>{{ item.posicion }}</td>
+        <td>{{ item.nombreCompleto }}</td>
+        <td class="text-right font-semibold">{{ item.puntosTotales }}</td>
+      </tr>
+    </tbody>
+  </table>
+</z-card>

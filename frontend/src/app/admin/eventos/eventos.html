@@ -1,0 +1,47 @@
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800">Eventos Especiales</h1>
+
+    <z-button zType="default" (click)="crearEvento()">
+        + Nuevo evento
+    </z-button>
+</div>
+
+<table z-table class="w-full">
+    <thead class="bg-gray-100 text-sm text-gray-700 uppercase" z-table-header>
+        <tr z-table-row>
+            <th z-table-head class="py-3 px-4 text-left">Nombre</th>
+            <th z-table-head class="py-3 px-4 text-left">Fecha</th>
+            <th z-table-head class="py-3 px-4 text-left">Hora</th>
+            <th z-table-head class="py-3 px-4 text-left">Aforo</th>
+            <th z-table-head class="py-3 px-4 text-left">Costo adicional</th>
+            <th z-table-head class="py-3 px-4 text-left">Atracciones</th>
+            <th z-table-head class="py-3 px-4 text-right">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody z-table-body>
+        <tr z-table-row *ngFor="let e of eventos" class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+
+            <td z-table-cell class="py-3 px-4">{{ e.nombre }}</td>
+            <td z-table-cell class="py-3 px-4">{{ e.fecha | date:'dd/MM/yyyy' }}</td>
+            <td z-table-cell class="py-3 px-4">{{ e.hora }}</td>
+            <td z-table-cell class="py-3 px-4">{{ e.aforo }}</td>
+            <td z-table-cell class="py-3 px-4">${{ e.costoAdicional }}</td>
+
+            <td z-table-cell class="py-3 px-4">
+                <span *ngIf="e.atracciones.length === 0">-</span>
+                <ul *ngIf="e.atracciones.length > 0" class="list-disc list-inside">
+                    <li *ngFor="let a of e.atracciones">{{ a.nombre }}</li>
+                </ul>
+            </td>
+
+            <td z-table-cell class="py-3 px-4 text-right">
+                <div class="flex justify-end gap-2">
+                    <z-button zType="ghost" size="icon" title="Eliminar evento" (click)="eliminar(e.id)">
+                        <z-icon [zType]="TrashIcon" class="w-4 h-4 text-red-500"></z-icon>
+                    </z-button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

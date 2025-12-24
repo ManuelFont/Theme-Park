@@ -1,0 +1,44 @@
+<div class="flex h-screen w-full bg-neutral-50 text-neutral-900">
+  <aside class="w-64 bg-neutral-900 text-neutral-100 flex flex-col justify-between p-4 shadow-lg">
+    <div>
+      <div class="mb-6 flex justify-center">
+        <img src="assets/logo-navbar.png" alt="Parque Temático" class="w-full max-w-[220px] h-auto object-contain">
+      </div>
+
+      <h2 class="text-xl font-semibold mb-8 tracking-wide flex items-center gap-2">
+        <z-icon zType="layout-dashboard" class="text-primary-400"></z-icon>
+        <span>Panel {{ userRole }}</span>
+      </h2>
+
+      <nav class="flex flex-col space-y-1">
+        <a
+          *ngFor="let link of links"
+          [routerLink]="link.path"
+          routerLinkActive="bg-neutral-800 text-primary-400"
+          class="transition-all flex items-center gap-2 px-3 py-2 rounded-md hover:bg-neutral-800 hover:text-primary-300 font-medium text-sm"
+        >
+          <z-icon [zType]="link.icon" class="w-4 h-4"></z-icon>
+          {{ link.label }}
+        </a>
+      </nav>
+    </div>
+
+    <div class="border-t border-neutral-700 pt-4 mt-4">
+      <button
+        z-button
+        zType="ghost"
+        class="w-full text-left flex items-center gap-2 text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100"
+        (click)="logout()"
+      >
+        <z-icon zType="log-out" class="w-4 h-4"></z-icon>
+        Cerrar sesión
+      </button>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-auto p-6">
+    <div class="max-w-7xl mx-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,60 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-semibold text-gray-800">Atracciones</h1>
+
+  <z-button *ngIf="modo === 'admin'" zType="default" (click)="onCrear()">
+    + Nueva atracción
+  </z-button>
+</div>
+
+<table z-table class="w-full">
+  <thead class="bg-gray-100 text-sm text-gray-700 uppercase">
+    <tr>
+      <th class="py-3 px-4 text-left">Nombre</th>
+      <th class="py-3 px-4 text-left">Tipo</th>
+      <th class="py-3 px-4 text-left">Edad mínima</th>
+      <th class="py-3 px-4 text-left">Capacidad máxima</th>
+      <th class="py-3 px-4 text-left">Descripción</th>
+      <th class="py-3 px-4 text-left">Disponible</th>
+      <th class="py-3 px-4 text-left">
+        {{ modo === 'admin' ? 'Acciones' : 'Operar' }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr
+      *ngFor="let a of atracciones"
+      class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
+    >
+      <td class="py-3 px-4">{{ a.nombre }}</td>
+      <td class="py-3 px-4">{{ a.tipo }}</td>
+      <td class="py-3 px-4">{{ a.edadMinima }}</td>
+      <td class="py-3 px-4">{{ a.capacidadMaxima }}</td>
+      <td class="py-3 px-4">{{ a.descripcion }}</td>
+      <td class="py-3 px-4">{{ !!a.disponible ? 'Disponible' : 'No disponible' }}</td>
+
+      <td class="py-3 px-4 text-right">
+        <div class="flex justify-end gap-2">
+          <ng-container *ngIf="modo === 'admin'">
+            <z-button zType="ghost" size="icon" title="Editar atracción" (click)="onEditar(a)">
+              <z-icon [zType]="SquarePen" class="w-4 h-4"></z-icon>
+            </z-button>
+
+            <z-button
+              zType="ghost"
+              size="icon"
+              title="Eliminar atracción"
+              (click)="onEliminar(a.id)"
+            >
+              <z-icon [zType]="TrashIcon" class="w-4 h-4 text-red-500"></z-icon>
+            </z-button>
+          </ng-container>
+
+          <ng-container *ngIf="modo === 'operador'">
+            <z-button zType="default" (click)="onSeleccionar(a)"> Operar </z-button>
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,48 @@
+@if (cargando) {
+<div class="flex justify-center items-center h-40">
+    <!-- <span z-loading size="lg"></span> -->
+</div>
+} @else {
+
+<div class="max-w-3xl mx-auto space-y-6">
+
+    <z-card zTitle="Estrategia de puntuación" zDescription="Seleccioná cómo se calculan los puntos dentro del parque.">
+
+        <div class="space-y-6">
+
+            <!-- Estrategia activa -->
+            <div class="p-3 bg-muted rounded-lg">
+                <p class="font-semibold text-sm">Estrategia activa:</p>
+                <p class="text-primary font-medium">{{ activa?.nombre }}</p>
+                <p class="text-sm opacity-70">{{ activa?.descripcion }}</p>
+            </div>
+
+            <!-- Radios -->
+            <div class="flex flex-col gap-4">
+                @for (e of estrategias; track e.nombre) {
+
+                <z-card class="border p-4" zTitle="{{ e.nombre }}" zDescription="{{ e.descripcion }}">
+                    <div class="flex justify-between items-center mt-2">
+                        <span z-radio name="estrategia" [(ngModel)]="estrategiaSeleccionada" [value]="e.nombre"
+                            (ngModelChange)="cambiar()" class="cursor-pointer">
+                        </span>
+                    </div>
+                </z-card>
+
+                }
+            </div>
+
+            @if (cambiando) {
+            <div class="flex items-center gap-2 justify-end mt-2">
+                <!-- <span z-loading size="sm"></span> -->
+                <span class="text-sm opacity-70">Cambiando estrategia...</span>
+            </div>
+            }
+
+        </div>
+
+    </z-card>
+
+</div>
+
+}

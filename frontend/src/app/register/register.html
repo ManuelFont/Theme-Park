@@ -1,0 +1,112 @@
+<div class="min-h-screen w-full flex items-center justify-center bg-gray-50 p-4">
+  <z-card class="w-full max-w-sm text-start" zTitle="Registrate" zDescription="Creá tu cuenta">
+    <form [formGroup]="form" class="space-y-4">
+      <div>
+        <label class="text-sm font-medium">Nombre</label>
+        <input z-input formControlName="nombre" placeholder="Juan" autocomplete="name" />
+        <p *ngIf="f['nombre'].touched && f['nombre'].invalid" class="text-xs text-red-500">
+          2-50 caracteres requeridos.
+        </p>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Apellido</label>
+        <input
+          z-input
+          formControlName="apellido"
+          placeholder="García"
+          autocomplete="additional-name"
+        />
+        <p *ngIf="f['apellido'].touched && f['apellido'].invalid" class="text-xs text-red-500">
+          2-50 caracteres requeridos.
+        </p>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Email</label>
+        <input
+          z-input
+          formControlName="email"
+          placeholder="usuario@mail.com"
+          autocomplete="email"
+        />
+        <p *ngIf="f['email'].touched && f['email'].invalid" class="text-xs text-red-500">
+          Ingresá un email válido.
+        </p>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Contraseña</label>
+        <div class="relative">
+          <input
+            z-input
+            formControlName="password"
+            [type]="hidePassword ? 'password' : 'text'"
+            autocomplete="new-password"
+            placeholder="********"
+            class="pr-10"
+          />
+          <button
+            type="button"
+            class="absolute right-3 top-3 text-gray-500"
+            (click)="hidePassword = !hidePassword"
+          >
+            <z-icon [zType]="hidePassword ? iconEyeOff : iconEye"></z-icon>
+          </button>
+        </div>
+        <p *ngIf="f['password'].touched && f['password'].invalid" class="text-xs text-red-500">
+          Mínimo 6 caracteres y caracteres especiales.
+        </p>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Repetir contraseña</label>
+        <div class="relative">
+          <input
+            z-input
+            formControlName="confirmPassword"
+            [type]="hideConfirm ? 'password' : 'text'"
+            autocomplete="current-password"
+            placeholder="********"
+            class="pr-10"
+          />
+          <button
+            type="button"
+            class="absolute right-3 top-3 text-gray-500"
+            (click)="hideConfirm = !hideConfirm"
+          >
+            <z-icon [zType]="hideConfirm ? iconEyeOff : iconEye"></z-icon>
+          </button>
+        </div>
+        <p
+          *ngIf="form.errors?.['mismatch'] && f['confirmPassword'].touched"
+          class="text-xs text-red-500"
+        >
+          Las contraseñas no coinciden.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="text-sm font-medium">Fecha de nacimiento</label>
+          <input z-input type="date" formControlName="fechaNacimiento" />
+          <p
+            *ngIf="f['fechaNacimiento'].touched && f['fechaNacimiento'].invalid"
+            class="text-xs text-red-500"
+          >
+            Obligatorio para visitantes.
+          </p>
+        </div>
+      </div>
+
+      <z-button class="w-full" zType="default" (click)="submit()" [zLoading]="loading">
+        Registrarse
+      </z-button>
+
+      <p class="text-sm text-gray-600 text-center">
+        ¿Ya tenés cuenta?
+        <a routerLink="/login" class="text-blue-600 hover:underline">Iniciá sesión</a>
+      </p>
+    </form>
+  </z-card>
+</div>

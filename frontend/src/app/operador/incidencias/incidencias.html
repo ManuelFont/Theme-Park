@@ -1,0 +1,46 @@
+<div class="p-6 max-w-3xl mx-auto space-y-8">
+  <h1 class="text-3xl font-semibold text-gray-800 text-center">Gestión de incidencias</h1>
+
+  <div class="flex justify-center">
+    <z-button zType="default" (click)="toggleCrear()">
+      {{ creando ? 'Cancelar' : 'Nueva incidencia' }}
+    </z-button>
+  </div>
+
+  <div *ngIf="creando" class="p-5 border rounded-xl bg-white shadow space-y-4">
+    <z-select class="w-full" zPlaceholder="Tipo de incidencia" [(zValue)]="tipo">
+      <z-select-item *ngFor="let t of tipos" [zValue]="t.value">
+        {{ t.label }}
+      </z-select-item>
+    </z-select>
+
+    <input zInput class="w-full" placeholder="Descripción" [(ngModel)]="descripcion" />
+
+    <z-button zType="default" class="w-full" (click)="crearIncidencia()">
+      Crear incidencia
+    </z-button>
+  </div>
+
+  <div *ngIf="incidencias.length === 0 && !cargando" class="text-gray-600 text-center">
+    No hay incidencias registradas.
+  </div>
+
+  <div class="space-y-4" *ngIf="incidencias.length > 0">
+    <div *ngFor="let i of incidencias" class="p-4 border rounded-xl bg-white shadow-sm">
+      <div class="flex justify-between">
+        <div>
+          <p class="font-semibold">{{ i.tipoIncidencia }}</p>
+          <p class="text-gray-700">{{ i.descripcion }}</p>
+        </div>
+
+        <span>
+          {{ i.estaActiva ? 'Activa' : 'Cerrada' }}
+        </span>
+      </div>
+
+      <div *ngIf="i.estaActiva" class="mt-3">
+        <z-button zType="secondary" (click)="cerrar(i)"> Cerrar incidencia </z-button>
+      </div>
+    </div>
+  </div>
+</div>

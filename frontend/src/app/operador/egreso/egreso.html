@@ -1,0 +1,49 @@
+<div class="p-6 max-w-lg mx-auto">
+    <z-card class="p-6">
+        <div class="space-y-6">
+            <h1 class="text-2xl font-bold text-gray-800">Registrar salida</h1>
+
+            <div>
+                <label class="font-medium">ID de acceso</label>
+                <input type="text" class="w-full p-2 border rounded-lg mt-1" [(ngModel)]="accesoId"
+                    placeholder="Escanear o ingresar ID de acceso..." />
+            </div>
+
+            <button z-button class="w-full" zType="default" (click)="buscarAcceso()" [disabled]="cargando || !accesoId">
+                Buscar acceso
+            </button>
+
+            <div *ngIf="cargando" class="text-center text-gray-500">Procesando...</div>
+
+            <div *ngIf="error" class="bg-red-100 text-red-700 p-3 rounded">
+                {{ error }}
+            </div>
+
+            <div *ngIf="acceso" class="space-y-4 bg-gray-50 p-4 rounded-lg border">
+                <p><strong>Visitante:</strong> {{ acceso.visitante.nombre }} {{ acceso.visitante.apellido }}</p>
+                <p><strong>Atracción:</strong> {{ acceso.atraccion.nombre }}</p>
+                <p><strong>Ingreso:</strong> {{ acceso.fechaHoraIngreso | date : 'short' }}</p>
+                <p>
+                    <strong>Egreso:</strong>
+                    <ng-container *ngIf="acceso.fechaHoraEgreso; else sinEgreso">
+                        {{ acceso.fechaHoraEgreso | date : 'short' }}
+                    </ng-container>
+                    <ng-template #sinEgreso> No registrado </ng-template>
+                </p>
+
+                <button z-button class="w-full" zType="secondary" *ngIf="!acceso.fechaHoraEgreso"
+                    (click)="registrarEgreso()">
+                    Registrar salida
+                </button>
+
+                <div *ngIf="resultado" class="bg-green-100 text-green-700 p-3 rounded">
+                    {{ resultado }}
+                </div>
+            </div>
+
+            <button z-button zType="ghost" class="w-full" (click)="volver()">
+                Volver a la atracción
+            </button>
+        </div>
+    </z-card>
+</div>
